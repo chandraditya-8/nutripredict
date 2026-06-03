@@ -1,50 +1,96 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Smart Diet Recommendation</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Diet Recommendation System</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+
 <div class="container">
-<h1>Smart Diet Recommendation System</h1>
 
-<form method="POST">
-<input type="number" name="age" placeholder="Age" required>
+    <h1>🥗 Smart Diet Recommendation System</h1>
 
-<select name="gender">
-<option value="0">Male</option>
-<option value="1">Female</option>
-</select>
+    {% if error %}
+    <div class="error">
+        {{ error }}
+    </div>
+    {% endif %}
 
-<input type="number" step="0.1" name="weight" placeholder="Weight (kg)" required>
-<input type="number" step="0.1" name="height" placeholder="Height (cm)" required>
+    <form method="POST">
 
-<select name="activity">
-<option value="0">Sedentary</option>
-<option value="1">Moderate</option>
-<option value="2">Active</option>
-</select>
+        <input type="number" name="age" placeholder="Age" required>
 
-<select name="goal">
-<option value="0">Lose Weight</option>
-<option value="1">Maintain Weight</option>
-<option value="2">Gain Weight</option>
-</select>
+        <select name="gender">
+            <option value="0">Male</option>
+            <option value="1">Female</option>
+        </select>
 
-<button type="submit">Predict</button>
-</form>
+        <input type="number" step="0.1" name="weight" placeholder="Weight (kg)" required>
 
-{% if result %}
-<div class="card">
-<h2>Results</h2>
-<p>BMI: {{ bmi }}</p>
-<p>Calories: {{ result.calories }}</p>
-<p>Protein: {{ result.protein }} g</p>
-<p>Carbs: {{ result.carbs }} g</p>
-<p>Fat: {{ result.fat }} g</p>
+        <input type="number" step="0.1" name="height" placeholder="Height (cm)" required>
+
+        <select name="activity">
+            <option value="0">Sedentary</option>
+            <option value="1">Moderately Active</option>
+            <option value="2">Very Active</option>
+        </select>
+
+        <select name="goal">
+            <option value="0">Lose Weight</option>
+            <option value="1">Maintain Weight</option>
+            <option value="2">Gain Weight</option>
+        </select>
+
+        <button type="submit">Generate Recommendation</button>
+
+    </form>
+
+    {% if result %}
+    <div class="card">
+
+        <h2>Your Results</h2>
+
+        <div class="result-box">
+
+            <div class="metric">
+                <h3>BMI</h3>
+                <span>{{ bmi }}</span>
+            </div>
+
+            <div class="metric">
+                <h3>Status</h3>
+                <span>{{ bmi_status }}</span>
+            </div>
+
+            <div class="metric">
+                <h3>Calories</h3>
+                <span>{{ result.calories }}</span>
+            </div>
+
+            <div class="metric">
+                <h3>Protein</h3>
+                <span>{{ result.protein }} g</span>
+            </div>
+
+            <div class="metric">
+                <h3>Carbs</h3>
+                <span>{{ result.carbs }} g</span>
+            </div>
+
+            <div class="metric">
+                <h3>Fat</h3>
+                <span>{{ result.fat }} g</span>
+            </div>
+
+        </div>
+
+    </div>
+    {% endif %}
+
 </div>
-{% endif %}
-</div>
+
 </body>
 </html>

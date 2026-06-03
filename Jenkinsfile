@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        IMAGE_NAME = "chandraditya9090/diet-ml-app"
+        IMAGE_NAME = "chandraditya9090/nutripredict"
     }
     stages {
         stage('Build') {
